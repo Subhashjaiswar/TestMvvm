@@ -12,46 +12,47 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-import SwiftUI
-import UIKit
-struct UserInfo : Codable {
-	let userId : Int?
-	let id : Int?
-	let title : String?
-	let completed : Bool?
+struct UserProfile : Codable {
+	let result : String?
+	let path : String?
+	let msg : String?
+	let data : Data?
 
 	enum CodingKeys: String, CodingKey {
 
-		case userId = "userId"
-		case id = "id"
-		case title = "title"
-		case completed = "completed"
+		case result = "result"
+		case path = "path"
+		case msg = "msg"
+		case data = "data"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		userId = try values.decodeIfPresent(Int.self, forKey: .userId)
-		id = try values.decodeIfPresent(Int.self, forKey: .id)
-		title = try values.decodeIfPresent(String.self, forKey: .title)
-		completed = try values.decodeIfPresent(Bool.self, forKey: .completed)
+		result = try values.decodeIfPresent(String.self, forKey: .result)
+		path = try values.decodeIfPresent(String.self, forKey: .path)
+		msg = try values.decodeIfPresent(String.self, forKey: .msg)
+		data = try values.decodeIfPresent(Data.self, forKey: .data)
 	}
 
-    func getStatus() -> String{
-        if completed ?? true{
-            return "Completed"
-        }else{
-            return "Not Completed"
-        }
-    }
-    
-    
-    func getStatusColor() -> (String,UIColor)
-    {
-        if completed ?? true{
-            return ("COmpleted",UIColor.systemCyan)
-        }else{
-            return ("COmpleted",UIColor.systemRed)
-        }
-    }
-    
 }
+
+//struct Vendor {
+//    let id: String
+//    let type: String
+//    let countryId: String
+//    // Add other properties from the JSON response
+//    // Example:
+//    let firstName: String
+//    let lastName: String
+//    let userEmail: String
+//    // Add other properties as per your JSON response
+//
+//    init(id:String,type:String,countryId:String,firstName:String,lastName:String,userEmail:String) {
+//        self.id = id
+//        self.type = type
+//        self.countryId = countryId
+//        self.firstName = firstName
+//        self.lastName = lastName
+//        self.userEmail = userEmail
+//    }
+//}
